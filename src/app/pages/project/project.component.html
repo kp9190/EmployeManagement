@@ -1,0 +1,60 @@
+<div class="tab-pane fade show active" id="projects" role="tabpanel">
+
+    <div class="row">
+        <div class="col-6">
+            <h2>Project</h2>
+        </div>
+    </div>
+    <div class="col-6">
+        <button routerLink="/new-project/0" class="btn btn-success">New Project</button>
+    </div>
+
+</div>
+
+
+
+
+
+<div class="container mt-5">
+    <h3 class="text-center mb-4">Project List</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Sr No.</th>
+                    <th>Project Name</th>
+                    <th>Client Name</th>
+                    <th>Start Date</th>
+                    <th>Lead By Employee</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (item of projectList; track $index) {
+                    <tr>
+                        <td>{{$index +1 }}</td>
+                        <td>{{ item.projectName }}</td>
+                        <td>{{ item.clientName }}</td>
+                        <td>{{ item.startDate  }}</td>
+                        <td>{{ item.leadByEmpId }}</td>
+                        
+                        <td>
+                            <button type="button"
+                                    class="btn btn-primary btn-sm me-2"
+                                    (click)="onEditProject(item.projectId)"
+                                        > 
+                                Edit
+                            </button>
+
+                            <button type="button"
+                                    class="btn btn-warning btn-sm"
+                                    (click)="onDeleteProject(item.projectId)">
+                                Delete
+                            </button>
+                        </td>
+                    </tr> 
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

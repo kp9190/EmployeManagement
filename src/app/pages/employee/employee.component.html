@@ -1,0 +1,133 @@
+<div class="tab-pan fade show active" id="employee" role="tabpanel">
+    <div class="row">
+        <div class="col-6">
+            <h2>Employee</h2>
+        </div>
+        <div class="col-6 text-end">
+            <button class="btn btn-success" (click)="isFormVisiable.set(true)">Add New</button>
+        </div>
+    </div>
+</div> 
+@if(isFormVisiable()){
+<div class="container">
+    <div class="form-container">
+        <h3 class="text-center mb-4">Employee Registration</h3>
+
+        <form>
+            
+            <!-- Employee Name -->
+            <div class="mb-3">
+                <label class="form-label">Employee Name</label>
+                <input type="text" class="form-control" [(ngModel)]="employeeObj.employeeName" name="employeeName" placeholder="Enter full name" required>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" [(ngModel)]="employeeObj.emailId" name="emailId" placeholder="Enter email" required>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" [(ngModel)]="employeeObj.password" name="password" placeholder="Enter password" required>
+            </div>
+
+            <!-- Gender -->
+            <div class="mb-3">
+                <label class="form-label">Gender</label>
+                <select class="form-select" name="gender" [(ngModel)]="employeeObj.gender" required>
+                    <option value="">Select Gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </select>
+            </div>
+
+            <!-- Contact -->
+            <div class="mb-3">
+                <label class="form-label">Contact</label>
+                <input type="tel" class="form-control" [(ngModel)]="employeeObj.contactNo" name="contactNo" placeholder="Enter contact number" required>
+            </div>
+
+            <!-- Department -->
+            <div class="mb-3">
+                <label for="deptId1" class="form-label">Parent Department</label>
+                <select id="deptId1" class="form-select" [(ngModel)]="parentDeptId" (change)="getParentDeptChange()" name="parentDeptId">
+                    <option selected>Select Department</option>
+                    @for (item of parentDeptList(); track item.departmentId) {
+                        <option [value]="item.departmentId">{{item.departmentName}}</option>
+                    }
+                </select>    
+            </div>
+            <div class="mb-3">
+                <label for="deptId2" class="form-label">Child Department</label>
+                <select id="deptId2" class="form-select" name="deptId" [(ngModel)]="employeeObj.deptId">
+                    <option selected>Select Department</option>
+                    @for (item of childDeptList(); track item.childDeptId) {
+                        <option [value]="item.childDeptId">{{item.departmentName}}</option>
+                    }
+                </select>        
+            </div>
+
+            <!-- Role -->
+            <div class="mb-3">
+                <label class="form-label">Role</label>
+                <input type="text" class="form-control" name="role" [(ngModel)]="employeeObj.role" placeholder="Enter role" required>
+            </div>
+
+            <!-- Submit -->
+            <div class="d-grid ">
+                @if(this.employeeObj.employeeId ==0){
+                    <button type="button" class="btn btn-primary mb-3" (click)="onSave()">Save Employee</button>
+                }@else {
+                    <button type="button" class="btn btn-warning mb-3" (click)="onSave()">Update Employee</button>
+                }
+                <button class="btn btn-success" (click)="isFormVisiable.set(false)">Close</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+}
+<div>
+    <div class="container mt-5">
+    <h3 class="text-center mb-4">Employee List</h3>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Employee Name</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Contact</th>
+                    <th>Department</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (item of employeeList(); track item) {
+
+                    <tr>
+                        <td>{{item.employeeName}}</td>
+                        <td>{{item.emailId}}</td>
+                        <td>{{item.gender}}</td>
+                        <td>{{item.contactNo}}</td>
+                        <td>{{item.deptId}}</td>
+                        <td>{{item.role}}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary mt-3" (click)="onEdit(item)">Edit</button>
+                            <button type="button" class="btn btn-warning mt-3" (click)="onDelete(item.employeeId)">Delete</button>
+                        </td>        
+                    </tr>
+                    }
+
+                <!-- More rows will come from database -->
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+

@@ -1,0 +1,110 @@
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0">Project Employee List</h5>
+    </div>
+
+    <div class="card-body">
+      <form>
+        <div class="row g-3">
+          <!-- Project ID -->
+          <div class="col-md-4">
+            <label for="projectId" class="form-label">Project ID</label>
+            <select class="form-select" formControlName="empProjectId">
+              @for (item of projectList | async; track $index) {
+              <option [value]="item.projectId">{{ item.projectName }}</option>
+              }
+            </select>
+          </div>
+
+          <!-- Employee ID -->
+          <div class="col-md-4">
+            <label class="form-label">Employee ID</label>
+            <select class="form-select" formControlName="empId">
+              @for (item of employeeList | async; track $index) {
+              <option [value]="item.employeeId">{{ item.employeeName }}</option>
+              }
+            </select>
+          </div>
+
+          <!-- Assigned Date -->
+          <div class="col-md-4">
+            <label class="form-label">Assigned Date</label>
+            <input
+              type="date"
+              class="form-control"
+              formControlName="assignedDate"
+            />
+          </div>
+
+          <!-- Role -->
+          <div class="col-md-6">
+            <label class="form-label">Role</label>
+            <select class="form-select" formControlName="role">
+              <option selected disabled>Select Role</option>
+              <option>Developer</option>
+              <option>Tester</option>
+              <option>Manager</option>
+              <option>Designer</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Role</label>
+            <input type="checkbox" />
+          </div>
+          <!-- Submit Button -->
+          <div class="col-md-6 d-flex align-items-end">
+            <button class="btn btn-success w-100" (click)="onSubmit()">
+              {{ isEditMode ? "Update" : "Save" }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="card-header bg-dark text-white">
+      <h5 class="mb-0">Add New Project Employee</h5>
+    </div>
+
+    <div class="card-body table-responsive">
+      <table class="table table-bordered table-hover align-middle">
+        <thead class="table-light text-center">
+          <tr>
+            <th>Sr No.</th>
+            <th>Project ID</th>
+            <th>Employee ID</th>
+            <th>Assigned Date</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody class="text-center">
+          @for(item of projectEmployeeList(); track $index){
+
+          <tr>
+            <td>{{ $index + 1}}</td>
+            <td>{{ item.projectId }}</td>
+            <td>{{ item.empProjectId }}</td>
+            <td>{{ item.assignedDate }}</td>
+            <td>{{ item.role }}</td>
+            <td>
+              <span class="badge bg-success">Active</span>
+            </td>
+            <td>
+              <button class="btn btn-sm btn-warning me-1" (click)="onEdit(item)">Edit</button>
+              <button class="btn btn-sm btn-danger" >Deactivate</button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

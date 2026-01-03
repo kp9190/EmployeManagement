@@ -1,0 +1,46 @@
+/* Ocean theme custom styles */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(26, 107, 195, 0.1) !important;
+}
+
+.blur-filter {
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+}
+
+/* Custom scrollbar for list */
+.list-group {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.list-group::-webkit-scrollbar {
+  width: 6px;
+}
+
+.list-group::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.list-group::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #1a6bc3, #39b8d8);
+  border-radius: 10px;
+}
+
+.list-group::-webkit-scrollbar-thumb:hover {
+  background: #0d4d8c;
+}
+
+/* Chart styling */
+#joiningChart {
+  background: linear-gradient(to bottom, #ffffff, #f8fbff);
+  border-radius: 8px;
+  padding: 10px;
+}

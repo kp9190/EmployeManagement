@@ -1,0 +1,127 @@
+<div
+  class="login-wrapper min-vh-100 d-flex align-items-center justify-content-center p-3"
+>
+  <div class="login-card fade-in">
+    <!-- Brand Header -->
+    <div class="brand-header text-center mb-4">
+      <div
+        class="logo-circle d-flex align-items-center justify-content-center mx-auto mb-3"
+      >
+        <i class="bi bi-shield-lock text-white fs-3"></i>
+      </div>
+      <h3 class="fw-bold text-ocean mb-1">Company Portal</h3>
+      <p class="text-muted small">Sign in to your account</p>
+    </div>
+
+    <!-- Login Form -->
+    <form class="login-form" (ngSubmit)="onLogin()">
+      <!-- Username -->
+      <div class="form-group mb-3">
+        <label class="form-label small text-muted mb-1">
+          <i class="bi bi-person me-1"></i>Username
+        </label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-end-0">
+            <i class="bi bi-person text-ocean"></i>
+          </span>
+          <input
+            type="text"
+            class="form-control border-start-0"
+            placeholder="Enter username"
+            [(ngModel)]="loginObj.username"
+            name="username"
+            required
+          />
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group mb-4">
+        <label class="form-label small text-muted mb-1">
+          <i class="bi bi-key me-1"></i>Password
+        </label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-end-0">
+            <i class="bi bi-lock text-ocean"></i>
+          </span>
+          <input
+            class="form-control border-start-0"
+            placeholder="Enter password"
+            [(ngModel)]="loginObj.password"
+            name="password"
+            [type]="showPassword ? 'text' : 'password'"
+            required
+          />
+
+          <button
+            class="input-group-text bg-light border-start-0"
+            type="button"
+            (click)="togglePassword()"
+          >
+            <i
+              class="bi"
+              [class.bi-eye]="!showPassword"
+              [class.bi-eye-slash]="showPassword"
+              [class.text-ocean]="!showPassword"
+              [class.text-secondary]="showPassword"
+            ></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Error Message -->
+      @if (errorMessage) {
+      <div class="alert alert-danger alert-sm py-2 mb-3">
+        <i class="bi bi-exclamation-triangle me-2"></i>
+        {{ errorMessage }}
+      </div>
+      }
+
+      <!-- Remember & Submit -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="rememberMe" />
+          <label class="form-check-label text-muted small" for="rememberMe">
+            Remember me
+          </label>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary btn-sm px-4"
+          [disabled]="isLoading"
+        >
+          @if (isLoading) {
+          <span
+            class="spinner-border spinner-border-sm me-2"
+            role="status"
+          ></span>
+          Signing in... } @else {
+          <i class="bi bi-box-arrow-in-right me-2"></i>
+          Sign In }
+        </button>
+      </div>
+
+      <!-- Divider -->
+      <div class="divider small mb-4">
+        <span class="divider-text">or</span>
+      </div>
+
+      <!-- Forgot Password -->
+      <div class="text-center mb-4">
+        <a href="#" class="text-decoration-none small text-ocean">
+          <i class="bi bi-key me-1"></i>
+          Forgot your password?
+        </a>
+      </div>
+
+      <!-- Footer -->
+      <div class="text-center">
+        <small class="text-muted">
+          © 2024 Company Portal
+          <span class="mx-2">•</span>
+          <a href="#" class="text-decoration-none text-ocean">Privacy Policy</a>
+        </small>
+      </div>
+    </form>
+  </div>
+</div>
