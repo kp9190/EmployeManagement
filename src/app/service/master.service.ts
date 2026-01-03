@@ -1,15 +1,17 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EnvironmentInjector, inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IApiResponse, IProject, IProjectEmployee } from '../model/interface/master';
 import { Employee } from '../model/class/Employee';
+import { environment } from '../../environment.prod';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MasterService {
   constructor(private http: HttpClient) {}
-  apiUrl = "/api/EmployeeManagement/"
+  url = environment.apiUrl;
+  apiUrl = this.url + "/api/EmployeeManagement/"
 
   getAllDepartments():Observable<IApiResponse> {
     return this.http.get<IApiResponse>(this.apiUrl + "GetParentDepartment"); // return only department list
