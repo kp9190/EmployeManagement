@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://employee7865.netlify.app/'
+  apiUrl: 'https://projectapi.gerasim.in'
 };
