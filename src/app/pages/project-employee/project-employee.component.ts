@@ -1,7 +1,8 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { IProject, IProjectEmployee } from '../../model/interface/master';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Component, inject} from '@angular/core';
+import { IProject } from '../../model/interface/master';
 import { MasterService } from '../../service/master.service';
-import { FormControl, FormGroup, ɵInternalFormsSharedModule } from '@angular/forms';
+import { FormControl, FormGroup} from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Employee } from '../../model/class/Employee';
 import { AsyncPipe } from '@angular/common';
@@ -12,9 +13,84 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './project-employee.component.html',
   styleUrl: './project-employee.component.css'
 })
-export class ProjectEmployeeComponent implements OnInit{
+export class ProjectEmployeeComponent{
 
-  projectEmployeeList = signal<IProjectEmployee[]>([])
+  // projectEmployeeList = signal<IProjectEmployee[]>([])
+  projectEmployeeList = [
+  {
+    "empProjectId": 1,
+    "projectId": 1,
+    "employeeId": 1,
+    "assignedDate": "2024-01-01",
+    "role": "Lead"
+  },
+  {
+    "empProjectId": 2,
+    "projectId": 1,
+    "employeeId": 2,
+    "assignedDate": "2024-01-02",
+    "role": "Member"
+  },
+  {
+    "empProjectId": 3,
+    "projectId": 2,
+    "employeeId": 2,
+    "assignedDate": "2024-02-01",
+    "role": "Lead"
+  },
+  {
+    "empProjectId": 4,
+    "projectId": 2,
+    "employeeId": 3,
+    "assignedDate": "2024-02-02",
+    "role": "Member"
+  },
+  {
+    "empProjectId": 5,
+    "projectId": 3,
+    "employeeId": 2,
+    "assignedDate": "2024-03-01",
+    "role": "Lead"
+  },
+  {
+    "empProjectId": 6,
+    "projectId": 3,
+    "employeeId": 4,
+    "assignedDate": "2024-03-02",
+    "role": "Member"
+  },
+  {
+    "empProjectId": 7,
+    "projectId": 4,
+    "employeeId": 5,
+    "assignedDate": "2025-12-31",
+    "role": "Lead"
+  },
+  {
+    "empProjectId": 8,
+    "projectId": 4,
+    "employeeId": 1,
+    "assignedDate": "2026-01-01",
+    "role": "Member"
+  },
+  {
+    "empProjectId": 9,
+    "projectId": 5,
+    "employeeId": 3,
+    "assignedDate": "2026-01-11",
+    "role": "Lead"
+  },
+  {
+    "empProjectId": 10,
+    "projectId": 5,
+    "employeeId": 4,
+    "assignedDate": "2026-01-12",
+    "role": "Member"
+  }
+]
+
+
+
   masterSrv = inject(MasterService);
   form: FormGroup = new FormGroup({});
   projectList : Observable<IProject[]> =new Observable<IProject[]>;
@@ -30,9 +106,9 @@ export class ProjectEmployeeComponent implements OnInit{
     this.employeeList = this.masterSrv.getAllEmployee();
   }
 
-  ngOnInit(): void {
-    this.getAllData();
-  }
+  // ngOnInit(): void {
+  //   // this.getAllData();
+  // }
 
   initializeForm(){
     this.form = new FormGroup({
@@ -47,28 +123,28 @@ export class ProjectEmployeeComponent implements OnInit{
   }
 
 
-  getAllData(){
-    this.masterSrv.getProjectEmployee().subscribe((res:IProjectEmployee[])=>{
-      this.projectEmployeeList.set(res);
-    });
-  }
+  // getAllData(){
+  //   this.masterSrv.getProjectEmployee().subscribe((res:IProjectEmployee[])=>{
+  //     this.projectEmployeeList.set(res);
+  //   });
+  // }
 
 
 
 
 onSave(){
   const formValue = this.form.value;
-  this.masterSrv.saveProjectEmployee(formValue).subscribe((res:IProject)=>{
-    debugger
+  this.masterSrv.saveProjectEmployee(formValue).subscribe(()=>{
+
     alert("Employee added to Project Created");
-    this.getAllData();
+    // this.getAllData();
     this.form.reset();
-  },err=>{
+  },()=>{
     alert("AIP Erre!");
   })
 }  
 
-onEdit(item: IProjectEmployee) {
+onEdit(item: any){
   this.isEditMode = true;
   this.selectedEmpProjectId = item.empProjectId;
 
@@ -90,7 +166,7 @@ onUpdate() {
     .subscribe({
       next: () => {
         alert('Employee updated successfully');
-        this.getAllData();
+        // this.getAllData();
         this.form.reset();
         this.isEditMode = false;
       },

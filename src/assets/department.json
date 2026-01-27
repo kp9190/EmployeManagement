@@ -1,0 +1,34 @@
+{
+  "departments": [
+    {
+      "deptId": 1,
+      "deptName": "Head Office",
+      "parentDeptId": null
+    },
+    {
+      "deptId": 2,
+      "deptName": "IT",
+      "parentDeptId": 1
+    },
+    {
+      "deptId": 3,
+      "deptName": "HR",
+      "parentDeptId": 1
+    },
+    {
+      "deptId": 4,
+      "deptName": "Finance",
+      "parentDeptId": 1
+    },
+    {
+      "deptId": 5,
+      "deptName": "Development",
+      "parentDeptId": 2
+    },
+    {
+      "deptId": 6,
+      "deptName": "Testing",
+      "parentDeptId": 2
+    }
+  ]
+}

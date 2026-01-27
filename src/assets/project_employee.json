@@ -1,0 +1,29 @@
+{
+  "projectEmployees": [
+    {
+      "empProjectId": 1,
+      "employeeId": 1,
+      "projectId": 1
+    },
+    {
+      "empProjectId": 2,
+      "employeeId": 2,
+      "projectId": 1
+    },
+    {
+      "empProjectId": 3,
+      "employeeId": 3,
+      "projectId": 2
+    },
+    {
+      "empProjectId": 4,
+      "employeeId": 4,
+      "projectId": 3
+    },
+    {
+      "empProjectId": 5,
+      "employeeId": 5,
+      "projectId": 2
+    }
+  ]
+}

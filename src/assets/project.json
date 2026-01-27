@@ -1,0 +1,44 @@
+{
+  "projects": [
+    {
+      "projectId": 1,
+      "projectName": "Employee Management System",
+      "startDate": "2024-01-01",
+      "endDate": "2024-06-30",
+      "clientName": "ABC Corp",
+      "leadByEmpId": 1
+    },
+    {
+      "projectId": 2,
+      "projectName": "Payroll Automation",
+      "startDate": "2024-02-01",
+      "endDate": "2024-07-31",
+      "clientName": "XYZ Ltd",
+      "leadByEmpId": 2
+    },
+    {
+      "projectId": 3,
+      "projectName": "HR Portal",
+      "startDate": "2024-03-01",
+      "endDate": "2024-08-31",
+      "clientName": "HR Solution Inc",
+      "leadByEmpId": 2
+    },
+    {
+      "projectId": 4,
+      "projectName": "poj 3",
+      "startDate": "2025-12-31",
+      "endDate": "2026-01-09",
+      "clientName": "rajesh",
+      "leadByEmpId": 5
+    },
+    {
+      "projectId": 5,
+      "projectName": "poj 2",
+      "startDate": "2026-01-11",
+      "endDate": "2026-01-16",
+      "clientName": "ramesh",
+      "leadByEmpId": 3
+    }
+  ]
+}

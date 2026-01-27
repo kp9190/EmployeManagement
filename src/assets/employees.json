@@ -1,0 +1,57 @@
+[
+  {
+    "employeeId": 1,
+    "name": "John Doe",
+    "email": "john.doe@gmail.com",
+    "phone": "9876543210",
+    "deptId": 5,
+    "salary": 60000.00,
+    "gender": "Male",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "employeeId": 2,
+    "name": "Jane Smith",
+    "email": "jane.smith@gmail.com",
+    "phone": "9876543211",
+    "deptId": 5,
+    "salary": 65000.00,
+    "gender": "Female",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "employeeId": 3,
+    "name": "Robert Brown",
+    "email": "robert.brown@gmail.com",
+    "phone": "9988776655",
+    "deptId": 6,
+    "salary": 55000.00,
+    "gender": "Male",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "employeeId": 4,
+    "name": "Emily Davis",
+    "email": "emily.davis@gmail.com",
+    "phone": "9876543213",
+    "deptId": 3,
+    "salary": 50000.00,
+    "gender": "Female",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "employeeId": 5,
+    "name": "Michael Wilson",
+    "email": "michael.wilson@gmail.com",
+    "phone": "9876543214",
+    "deptId": 4,
+    "salary": 70000.00,
+    "gender": "Male",
+    "password": "123456",
+    "role": "user"
+  }
+]
