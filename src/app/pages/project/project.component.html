@@ -24,9 +24,10 @@
                     <th>Sr No.</th>
                     <th>Project Name</th>
                     <th>Client Name</th>
-                    <th>Start Date</th>
+                    <th>Start Date</th> 
+                    <th>End Date</th>
                     <th>Lead By Employee</th>
-                    <th>Actions</th>
+                    <th>Active</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,8 +35,9 @@
                     <tr>
                         <td>{{$index +1 }}</td>
                         <td>{{ item.projectName }}</td>
-                        <td>{{ item.clientName }}</td>
-                        <td>{{ item.startDate  }}</td>
+                        <td>{{ item.clientname }}</td>
+                        <td>{{ item.startDate.split('T')[0]  }}</td>
+                        <td>{{ item.endDate.split('T')[0]  }}</td>
                         <td>{{ item.leadByEmpId }}</td>
                         
                         <td>

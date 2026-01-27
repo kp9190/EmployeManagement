@@ -52,7 +52,7 @@
             </div>
             <div>
               <h6 class="text-white-50 mb-1">Active Projects</h6>
-              <h4 class="mb-0 fw-bold">{{ dashboardData?.totalProject || 0 }}</h4>
+              <h4 class="mb-0 fw-bold">{{ dashboardData?.totalProjects || 0 }}</h4>
             </div>
           </div>
         </div>
@@ -105,8 +105,8 @@
                     <i class="bi bi-person-fill text-primary"></i>
                   </div>
                   <div>
-                    <span class="d-block fw-medium" style="color: #1a6bc3;">{{ emp.employeeName }}</span>
-                    <small class="text-muted">{{ emp.department || 'N/A' }}</small>
+                    <span class="d-block fw-medium" style="color: #1a6bc3;">{{ emp.name }}</span>
+                    <small class="text-muted">{{ emp.deptId || 'N/A' }}</small>
                   </div>
                 </div>
                 <small class="text-muted badge bg-info bg-opacity-10 text-info px-3 py-2">

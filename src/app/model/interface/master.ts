@@ -1,32 +1,29 @@
-import { NumberSymbol } from "@angular/common";
 
-export interface IApiResponse {
-  message: string;
-  result: boolean;
-  data: any;
+
+export interface IApiResponse<T>{
+  data: T;
+  message?: string;
+  result?: boolean;
 }
 
 export interface IParentDept{   
-      departmentId: number,
-      departmentName: string,
-      departmentLogo: string   
+      dept_id: number,
+      dept_name: string, 
 }
 
 export interface IChildDept{   
-      childDeptId: number,
-      parentDeptId: number,
-      departmentName: string
+      child_dept_id: number,
+      parent_dept_id: number,
+      department_name: string
 }
 
 export interface IProject{   
      projectId: number
       projectName: string
-      clientName: string
       startDate: string
+      endDate: string
+      clientname: string
       leadByEmpId: number
-      contactPerson: string
-      contactNo: string
-      emailId: string
 }
 
 export interface IProjectEmployee{
@@ -36,6 +33,6 @@ export interface IProjectEmployee{
       assignedDate: string;
       role: string
       isActive: string
-
+      
 }
 

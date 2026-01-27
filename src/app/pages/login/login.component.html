@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/label-has-associated-control -->
 <div
   class="login-wrapper min-vh-100 d-flex align-items-center justify-content-center p-3"
 >
@@ -17,6 +18,7 @@
     <form class="login-form" (ngSubmit)="onLogin()">
       <!-- Username -->
       <div class="form-group mb-3">
+        <!-- // eslint-disable-next-line @angular-eslint/template/label-has-associated-control -->
         <label class="form-label small text-muted mb-1">
           <i class="bi bi-person me-1"></i>Username
         </label>

@@ -1,42 +1,41 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IApiResponse, IProject, IProjectEmployee } from '../model/interface/master';
+import { IApiResponse, IChildDept, IParentDept, IProject, IProjectEmployee } from '../model/interface/master';
 import { Employee } from '../model/class/Employee';
-import { environment } from '../../environment.prod';
+import { environment } from '../../environment';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class MasterService {
+  // eslint-disable-next-line @angular-eslint/prefer-inject
   constructor(private http: HttpClient) {}
-  url = environment.apiUrl;
-  apiUrl = this.url + "/api/EmployeeManagement/"
+  apiUrl = environment.apiUrl;
 
-  getAllDepartments():Observable<IApiResponse> {
-    return this.http.get<IApiResponse>(this.apiUrl + "GetParentDepartment"); // return only department list
+  getAllDepartments():Observable<IApiResponse<IParentDept[]>> {
+    return this.http.get<IApiResponse<IParentDept[]>>(this.apiUrl + "GetParentDepartment"); // return only department list
   }
 
   getChildDeptByIdDept(deptid : number) {
-    return this.http.get<IApiResponse>(`${this.apiUrl}GetChildDepartmentByParentId?deptId=${deptid}`);
+    return this.http.get<IApiResponse<IChildDept[]>>(`${this.apiUrl}GetChildDepartmentByParentId?deptId=${deptid}`);
   }
 
   saveEmployee(emp : Employee) {
-    // debugger;
-    return this.http.post<IApiResponse>(`${this.apiUrl}CreateEmployee`,emp);
+    return this.http.post<IApiResponse<Employee>>(`${this.apiUrl}CreateEmployee`,emp);
   }
 
   getAllEmployee():Observable<Employee[]>{
     return this.http.get<Employee[]>(`${this.apiUrl}GetAllEmployees`);
   }
 
-  updateEmployee(emp : Employee):Observable<IApiResponse>{    
-    debugger
-    return this.http.put<IApiResponse>(this.apiUrl + "UpdateEmployee/" + emp.employeeId,emp);
+  updateEmployee(emp : Employee):Observable<IApiResponse<Employee>>{    
+    return this.http.put<IApiResponse<Employee>>(this.apiUrl + `UpdateEmployee/${emp.employeeId}`,emp);
   }
 
-  deleteEmployee(id : number):Observable<IApiResponse>{    
-    return this.http.delete<IApiResponse>(this.apiUrl + "DeleteEmployee/" + id );
+  deleteEmployee(id : number):Observable<IApiResponse<Employee>>{    
+    return this.http.delete<IApiResponse<Employee>>(this.apiUrl + "DeleteEmployee/" + id );
   }
 
   saveProject(emp : Employee):Observable<IProject>{
@@ -55,21 +54,25 @@ export class MasterService {
     return this.http.put<IProject>(this.apiUrl + "UpdateProject/"+ proj.projectId,proj);
   }
 
+  deleteProject(id: number):Observable<IProject>{
+    return this.http.delete<IProject>(this.apiUrl + "DeleteProject/"+ id);
+  }
+
   getProjectEmployee(): Observable<IProjectEmployee[]>{
     return this.http.get<IProjectEmployee[]>(this.apiUrl+ "GetAllProjectEmployees");
   }
 
   saveProjectEmployee(emp: IProjectEmployee): Observable<IProject>{
-    debugger
+    // debugger
     return this.http.post<IProject>(this.apiUrl+ "CreateProjectEmployees",emp);
   }
 
   updateProjectEmployee(proj: IProjectEmployee): Observable<IProjectEmployee>{
-    debugger
+    // debugger
     return this.http.put<IProjectEmployee>(this.apiUrl+ "UpdateProjectEmployees" + proj.empProjectId, proj);
   }
 
-  getDashbordData(): Observable<any>{
-    return this.http.get<any>(this.apiUrl + "GetDashboard");
+  getDashbordData(){
+    return this.http.get(this.apiUrl + "GetDashboard");
   }
 }

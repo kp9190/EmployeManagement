@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/label-has-associated-control -->
 <div class="container">
   <div class="form-container">
     <h3 class="text-center mb-4">Project Registration</h3>
@@ -16,46 +17,34 @@
         <input type="date" class="form-control" formControlName="startDate" name="startDate" required />
       </div>
 
+      <!-- Ending Date  -->
+      <div class="mb-3">
+        <label class="form-label">End Date</label>
+        <input type="date" class="form-control" formControlName="endDate" name="endDate" required />
+      </div>
+
       <!-- Client Name -->
       <div class="mb-3">
         <label class="form-label">Client Name</label>
-        <input type="text" class="form-control" formControlName="clientName" name="clientName"
+        <input type="text" class="form-control" formControlName="clientname" name="clientname"
           placeholder="Enter client name" required />
-      </div>
-
-      <!-- Contact Person -->
-      <div class="mb-3">
-        <label class="form-label">Contact Person</label>
-        <input type="text" class="form-control" formControlName="contactPerson" name="contactPerson"
-          placeholder="Enter contact person" required />
-      </div>
-
-      <!-- Contact No -->
-      <div class="mb-3">
-        <label class="form-label">Contact No</label>
-        <input type="tel" class="form-control" formControlName="contactNo" name="contactNo"
-          placeholder="Enter contact number" required />
       </div>
 
       <!-- Lead By Employee -->
       <div class="mb-3">
+        <!-- // eslint-disable-next-line @angular-eslint/template/label-has-associated-control -->
         <label class="form-label">Lead By Employee Id</label>
         <select class="form-select" name="leadByEmpId" formControlName="leadByEmpId" required>
           <option value="">Select Employee</option>
           @for(item of emplList | async; track $index){
-          <option [value]="item.employeeId">{{item.employeeName}}</option>
+          <option [value]="item.employeeId">{{item.name}}</option>
           }
         </select>
       </div>
 
-      <div class="mb-3">
-        <label class="form-label">Email Id</label>
-        <input type="email" class="form-control" formControlName="emailId" name="emailId"
-          placeholder="Enter contact number" required />
-      </div>
       <!-- Buttons -->
       <div class="d-grid">
-      @if(projectForm.controls['projectId'].value == 0){
+      @if(!isprojectupdate){
         <button type="button" class="btn btn-primary mb-3" (click)="onSaveProject()">
           Save Project
         </button>

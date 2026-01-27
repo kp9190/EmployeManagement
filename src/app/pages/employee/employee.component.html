@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/label-has-associated-control -->
 <div class="tab-pan fade show active" id="employee" role="tabpanel">
     <div class="row">
         <div class="col-6">
@@ -17,14 +18,15 @@
             
             <!-- Employee Name -->
             <div class="mb-3">
-                <label class="form-label">Employee Name</label>
-                <input type="text" class="form-control" [(ngModel)]="employeeObj.employeeName" name="employeeName" placeholder="Enter full name" required>
+                <!-- // eslint-disable-next-line @angular-eslint/template/label-has-associated-control -->
+                <label class="form-label" >Employee Name</label>
+                <input type="text" class="form-control" [(ngModel)]="employeeObj.name" name="name" placeholder="Enter full name" required>
             </div>
 
             <!-- Email -->
             <div class="mb-3">
                 <label class="form-label">Email</label>
-                <input type="email" class="form-control" [(ngModel)]="employeeObj.emailId" name="emailId" placeholder="Enter email" required>
+                <input type="email" class="form-control" [(ngModel)]="employeeObj.email" name="email" placeholder="Enter email" required>
             </div>
 
             <!-- Password -->
@@ -47,7 +49,7 @@
             <!-- Contact -->
             <div class="mb-3">
                 <label class="form-label">Contact</label>
-                <input type="tel" class="form-control" [(ngModel)]="employeeObj.contactNo" name="contactNo" placeholder="Enter contact number" required>
+                <input type="tel" class="form-control" [(ngModel)]="employeeObj.phone" name="phone" placeholder="Enter contact number" required>
             </div>
 
             <!-- Department -->
@@ -55,8 +57,8 @@
                 <label for="deptId1" class="form-label">Parent Department</label>
                 <select id="deptId1" class="form-select" [(ngModel)]="parentDeptId" (change)="getParentDeptChange()" name="parentDeptId">
                     <option selected>Select Department</option>
-                    @for (item of parentDeptList(); track item.departmentId) {
-                        <option [value]="item.departmentId">{{item.departmentName}}</option>
+                    @for(item of parentDeptList(); track item.dept_id) {
+                        <option [value]="item.dept_id">{{item.dept_name}}</option>
                     }
                 </select>    
             </div>
@@ -64,8 +66,8 @@
                 <label for="deptId2" class="form-label">Child Department</label>
                 <select id="deptId2" class="form-select" name="deptId" [(ngModel)]="employeeObj.deptId">
                     <option selected>Select Department</option>
-                    @for (item of childDeptList(); track item.childDeptId) {
-                        <option [value]="item.childDeptId">{{item.departmentName}}</option>
+                    @for(item of childDeptList(); track item.child_dept_id) {
+                        <option [value]="item.child_dept_id">{{item.department_name}}</option>
                     }
                 </select>        
             </div>
@@ -78,7 +80,7 @@
 
             <!-- Submit -->
             <div class="d-grid ">
-                @if(this.employeeObj.employeeId ==0){
+                @if(this.employeeObj.employeeId === 0){
                     <button type="button" class="btn btn-primary mb-3" (click)="onSave()">Save Employee</button>
                 }@else {
                     <button type="button" class="btn btn-warning mb-3" (click)="onSave()">Update Employee</button>
@@ -111,15 +113,15 @@
                 @for (item of employeeList(); track item) {
 
                     <tr>
-                        <td>{{item.employeeName}}</td>
-                        <td>{{item.emailId}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.email}}</td>
                         <td>{{item.gender}}</td>
-                        <td>{{item.contactNo}}</td>
+                        <td>{{item.phone}}</td>
                         <td>{{item.deptId}}</td>
                         <td>{{item.role}}</td>
                         <td>
                             <button type="button" class="btn btn-primary mt-3" (click)="onEdit(item)">Edit</button>
-                            <button type="button" class="btn btn-warning mt-3" (click)="onDelete(item.employeeId)">Delete</button>
+                            <button type="button" class="btn btn-warning mt-3" (click)="onDelete(item.employeeId!)">Delete</button>
                         </td>        
                     </tr>
                     }

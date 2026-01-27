@@ -22,7 +22,9 @@ export class LoginComponent {
   showPassword = false;
 
   constructor(
+    // eslint-disable-next-line @angular-eslint/prefer-inject
     private router: Router,
+    // eslint-disable-next-line @angular-eslint/prefer-inject
     private authService: AuthService
   ) {}
 

@@ -1,10 +1,11 @@
-import { Component, inject } from '@angular/core';
+/* eslint-disable @angular-eslint/prefer-inject */
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { Observable } from 'rxjs';
 import { Employee } from '../../model/class/Employee';
 import { MasterService } from '../../service/master.service';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe} from '@angular/common';
 import { IProject } from '../../model/interface/master';
 
 @Component({
@@ -13,33 +14,40 @@ import { IProject } from '../../model/interface/master';
   templateUrl: './project-form.component.html',
   styleUrl: './project-form.component.css',
 })
-export class ProjectFormComponent {
+export class ProjectFormComponent implements OnInit{
   projectForm: FormGroup = new FormGroup({});
-
+  isprojectupdate = false;
   emplList: Observable<Employee[]> = new Observable<[]>();
   masterSrv = inject(MasterService);
   activateRoute = inject(ActivatedRoute)
   
-  constructor() {
+  constructor(private router: Router,private routers: ActivatedRoute) {
     this.emplList = this.masterSrv.getAllEmployee();
     this.initializeForm();
-    this.activateRoute.params.subscribe((res:any)=>{
-      if(res.id !== 0){
-        this.getProject(res.id)
+    this.activateRoute.params.subscribe((res)=>{
+      if(res['employeeId'] !== 0){
+        this.getProject(res['employeeId'])
       }
     })
   }
+
+  ngOnInit() {
+  const id = this.routers.snapshot.paramMap.get('id');
+
+  if (id) {
+    this.isprojectupdate= true;
+    this.loadProject(+id);
+  }
+}
 
   initializeForm( data?: IProject) {
     this.projectForm = new FormGroup({
       projectId: new FormControl(data ? data.projectId : 0),
       projectName: new FormControl(data ? data.projectName : ''),
-      clientName: new FormControl(data ? data.clientName : ''),
+      clientname: new FormControl(data ? data.clientname : ''),
       startDate: new FormControl(data ? data.startDate : ''),
-      leadByEmpId: new FormControl(data ? data.leadByEmpId : ''),
-      contactPerson: new FormControl(data ? data.contactPerson : ''),
-      contactNo: new FormControl(data ? data.contactNo : ''),
-      emailId: new FormControl(data ? data.emailId : ''),
+      endDate: new FormControl(data ? data.endDate : ''),
+      leadByEmpId: new FormControl(data ? data.leadByEmpId : '')
     });
   }
 
@@ -47,30 +55,49 @@ getProject(id: number){
 
   this.masterSrv.getProjectById(id).subscribe((res:IProject)=>{
     this.initializeForm(res)
-  },err=>{
+  },()=>{
     alert('Api Error');
   })
 }
 
 onSaveProject(){
   const formValue = this.projectForm.value;
-  this.masterSrv.saveProject(formValue).subscribe((res:IProject)=>{
+  this.masterSrv.saveProject(formValue).subscribe(()=>{
     alert("Project Created");
     this.projectForm.reset();
-  },err=>{
+    this.router.navigate(['/projects']);
+  },()=>{
     alert('API Error');
   })
 }
 
 onUpadte(){
   const formValue = this.projectForm.value;
-  this.masterSrv.getProjectUpdate(formValue).subscribe((res:IProject)=>{
+  console.log(formValue);
+  
+  this.masterSrv.getProjectUpdate(formValue).subscribe(()=>{
     alert("Project Update");
     this.projectForm.reset();
-  },err=>{
+    this.router.navigate(['/projects']);
+  },()=>{
     alert('API Error');
   })
 }
+
+loadProject(id: number) {
+  this.masterSrv.getProjectById(id).subscribe(project => {
+   
+    this.projectForm.patchValue({
+      projectId: project.projectId,
+      projectName: project.projectName,
+      startDate: project.startDate?.split('T')[0] ,
+      endDate: project.endDate?.split('T')[0],
+      clientname: project.clientname,
+      leadByEmpId : project.leadByEmpId
+    });
+  });
+}
+
 
 
 }
